@@ -16,14 +16,15 @@ data = pydataset.data('faithful')
 X = np.array(data)
 print(X.shape)
 
-# Erstellen KMeans objekt
-k_means = KMeans(init='k-means++', n_clusters=2)
-# Geben KMeans die Daten (X)
-k_means.fit(X)
-# Speichern die Klassen-Variablen in eigenen Variablen
-k_means_labels = k_means.labels_                            # Namen sind Integer 0,1,...,n
-k_means_cluster_centers = k_means.cluster_centers_
-k_means_labels_unique = np.unique(k_means_labels)
+# # Aufgabe 1
+# # Erstellen KMeans objekt
+# k_means = KMeans(init='k-means++', n_clusters=2)
+# # Geben KMeans die Daten (X)
+# k_means.fit(X)
+# # Speichern die Klassen-Variablen in eigenen Variablen
+# k_means_labels = k_means.labels_                            # Namen sind Integer 0,1,...,n
+# k_means_cluster_centers = k_means.cluster_centers_
+# k_means_labels_unique = np.unique(k_means_labels)
 
 # Erstelle die Grafik
 plt.figure(figsize=(12, 6))
@@ -69,6 +70,5 @@ Aufgaben
 1) Finde Cluster
 2) Finde Ausreißer
 """
-#%%
 
 #%%
