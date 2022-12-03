@@ -25,20 +25,40 @@ for index, (image, label) in enumerate(images_and_labels[:10]):
 n_samples = len(digits.images)
 
 print('There are {0} images in the dataset'.format(n_samples))
-print(digits.images[0].shape)
-
+print(digits.images.shape)
 
 """
 Aufgabe
 Für die SVM wird ein Eingangsvektor, keine Matrix benötigt. Dafür gibt es den Befehl reshape(). Mehr unter http://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.reshape.html#numpy.reshape
-
 Die SVM muss initialisiert werden. Der Parameter C muss bestimmt werden. Benutzt metrics.classification_report und metrics.confusion_matrix um die Güte der Klassifikation zu beurteilen.
-
 Damit man sich von der Prädiktion überzeugen kann, plottet ähnlich wie oben einige Zahlen mit ihrem wahren Label und eurer Prädiktion
 """
 
-import numpy as np
-a = np.zeros((8,8))
-print(a)
-print(a.shape)
-print(a.reshape((64, )))
+# Dreidimensionales Array in zweidimensionales reshapen
+# (1712, 8, 8) -> (1712, 64)
+# 8x8 Array an Informationen wird in 1x64 Array geschrieben
+reshaped_data = digits.images.reshape((n_samples, 64))    # 8x8 -> 64
+
+from sklearn.model_selection import train_test_split
+# Daten werden in einen Train- und einen Test-Datensatz aufgeteilt.
+# Der Test-Datensatz stellt 25 Prozent der Originaldaten dar.
+reshaped_data_train, reshaped_data_test, target_data_train, target_data_test = train_test_split(reshaped_data, digits.target, test_size=0.25, random_state=0)
+
+classifier = svm.SVC()
+# Einlernen der Daten
+classifier.fit(reshaped_data_train, target_data_train)
+
+# Ausführen der Test-Daten
+y = classifier.predict(reshaped_data_test)
+
+print('Classification Report:')
+print(metrics.classification_report(target_data_test, y))
+
+# Die Confusion Matrix zeigt das von dem Modell erkannte Ergebnis in zusammenhang zu dem Input.
+# Wenn z.B. eine 6 als 8 erkannt wurde, erhöht sie die Zahl an der Stelle [6,8] um eins
+# Wenn eine 7 korrekt als eine 7 erkannt wird, wir die Stelle [7,7] um eins erhöht.
+print('Confusion Matrix:')
+print(metrics.confusion_matrix(target_data_test, y))
+
+
+#%%
