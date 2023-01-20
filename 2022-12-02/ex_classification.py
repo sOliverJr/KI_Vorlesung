@@ -37,12 +37,16 @@ Damit man sich von der Prädiktion überzeugen kann, plottet ähnlich wie oben e
 # Dreidimensionales Array in zweidimensionales reshapen
 # (1712, 8, 8) -> (1712, 64)
 # 8x8 Array an Informationen wird in 1x64 Array geschrieben
-reshaped_data = digits.images.reshape((n_samples, 64))    # 8x8 -> 64
+reshaped_data = digits.images.reshape((n_samples, 64))  # 8x8 -> 64
 
 from sklearn.model_selection import train_test_split
+
 # Daten werden in einen Train- und einen Test-Datensatz aufgeteilt.
 # Der Test-Datensatz stellt 25 Prozent der Originaldaten dar.
-reshaped_data_train, reshaped_data_test, target_data_train, target_data_test = train_test_split(reshaped_data, digits.target, test_size=0.25, random_state=0)
+reshaped_data_train, reshaped_data_test, target_data_train, target_data_test = train_test_split(reshaped_data,
+                                                                                                digits.target,
+                                                                                                test_size=0.25,
+                                                                                                random_state=0)
 
 classifier = svm.SVC()
 # Einlernen der Daten
@@ -61,4 +65,4 @@ print('Confusion Matrix:')
 print(metrics.confusion_matrix(target_data_test, y))
 
 
-#%%
+# %%
