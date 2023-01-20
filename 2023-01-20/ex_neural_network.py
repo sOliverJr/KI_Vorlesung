@@ -18,14 +18,3 @@ for i, result in enumerate(result):
     print('Datenpunkt ' + str(i) + ': ')
     print('   Wahrscheinlichkeit Klasse 1: ' + str(result[0]))
     print('   Wahrscheinlichkeit Klasse 2: ' + str(result[1]))
-
-print('Classification Report:')
-print(metrics.classification_report(target_data_test, result))
-
-# Die Confusion Matrix zeigt das von dem Modell erkannte Ergebnis in zusammenhang zu dem Input.
-# Wenn z.B. eine 6 als 8 erkannt wurde, erhöht sie die Zahl an der Stelle [6,8] um eins
-# Wenn eine 7 korrekt als eine 7 erkannt wird, wir die Stelle [7,7] um eins erhöht.
-print('Confusion Matrix:')
-print(metrics.confusion_matrix(target_data_test, result))
-
-#%%
